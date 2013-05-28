@@ -12,7 +12,7 @@ Some helpful commands for Sublime Text 2.
 
 - Align Indentation
     - Given a multi-line selection, all lines except the first will be reindented to the character column of the beginning of the selection.
-    - Thus it allows you to quickly indent a block to an exact column.
+    - You can quickly indent a block to an exact column.
     - Handy when used together with the command "Expand Selection to Brackets".
     - [See screenshot](https://raw.github.com/wiki/simonrad/sublime-selection-tools/AlignIndentation.png)
 
