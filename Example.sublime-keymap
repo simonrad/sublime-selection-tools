@@ -1,0 +1,6 @@
+[
+    { "keys": ["super+shift+\\"],     "command": "align_indentation" },
+    { "keys": ["ctrl+super+shift+g"], "command": "multi_quick_find_all" },
+    { "keys": ["super+o"],            "command": "reverse_selection_direction" },
+    { "keys": ["super+shift+o"],      "command": "shorten_selection" }
+]
