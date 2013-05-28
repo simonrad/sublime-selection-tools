@@ -1,5 +1,5 @@
-sublime-selection-tools
-=======================
+Sublime SelectionTools
+======================
 
 Some helpful commands for Sublime Text 2.
 
