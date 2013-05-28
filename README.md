@@ -3,6 +3,8 @@ Sublime SelectionTools
 
 Some helpful commands for Sublime Text 2.
 
+### Commands
+
 - Multi Quick Find All
     - Given some initially selected strings, selects all occurrances of any of those strings.
     - Like Sublime's built-in "Quick Find All" command, but works with multiple initial selections.
@@ -19,3 +21,8 @@ Some helpful commands for Sublime Text 2.
 - Shorten Selection
     - Shortens the selection by one character both at the front and the back.
     - This can be useful when expanding the selection to quotes or brackets. Sometimes you don't want to select the quotes, or the lines containing the brackets.
+
+
+### To use
+
+Add your desired key bindings to your User sublime-keymap file. An example keymap file is provided.
