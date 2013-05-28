@@ -29,27 +29,36 @@ class AlignIndentationCommand(sublime_plugin.TextCommand):
     """
     def run(self, edit):
         selected_regions = self.view.sel()
-        to_replace = []
+        to_replace = [] # List of (region, replacement_str) pairs.
 
         for region in selected_regions:
+            # Calculate the indentation (i.e. the column of the start of the selection), even when tabs are present.
             begin_row, begin_col = self.view.rowcol(region.begin())
             begin_line = self.view.substr(self.view.line(region.begin()))
             indent = 0
+            tab_size = self.view.settings().get('tab_size', 4)
             for col in range(begin_col):
                 if begin_line[col] == '\t':
-                    indent += self.view.settings().get('tab_size', 4)
+                    # Advance to the next tab stop.
+                    indent = (indent / tab_size + 1) * tab_size
                 else:
                     indent += 1
-            indent = " " * indent
+            indent = ' ' * indent
+
+            # Record the regions that we want to replace with `indent`.
             lines = self.view.lines(region)
             for line in lines[1:]:
-                space = sublime.Region(line.begin(), line.begin())
-                new_space = space
-                while space.a == space.b or self.view.substr(new_space).isspace() and new_space.end() < line.end():
-                    space = new_space
-                    new_space = sublime.Region(space.a, space.b + 1)
-                to_replace.append((space, indent))
+                # Take all the leading whitespace of the line.
+                num_leading_whitespace_chars = 0
+                for c in self.view.substr(line):
+                    if c.isspace():
+                        num_leading_whitespace_chars += 1
+                    else:
+                        break
+                whitespace_region = sublime.Region(line.begin(), line.begin() + num_leading_whitespace_chars)
+                to_replace.append((whitespace_region, indent))
 
+        # Replace the regions starting from the last one, so that we do not mess up the indices.
         to_replace.sort(key = (lambda pair: pair[0].begin()), reverse = True)
 
         edit = self.view.begin_edit()
